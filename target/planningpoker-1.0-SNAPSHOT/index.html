@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Planning Poker</title>
+	<link rel="stylesheet" type="text/css" href="poker.css">
+	<script type="text/javascript">
+    	var webSocket = 
+      		new WebSocket('ws://' + window.document.location.host + '/PlanningPoker/PokerEndpoint');
+      		
+      	var lastVote = -3;
+
+    	webSocket.onerror = function(event) {
+      		onError(event)
+    	};
+
+    	webSocket.onopen = function(event) {
+      		onOpen(event);
+    	};
+
+    	webSocket.onmessage = function(event) {
+      		onMessage(event)
+    	};    
+
+    	function onMessage(event) {
+    		var eventData = event.data;
+    		//If event data starts with URL
+    		if(eventData.indexOf('/URL') == 0){
+    			//trim the /URL command string from message 
+    			document.getElementById('frame').src = event.data.substr(4);
+    			eventData = 'URL has been set to '+event.data.substr(4);
+    		} else if(eventData.indexOf('/VOTEVALUE') == 0){
+    			//trim the /VOTEVALUE string from the message
+    			eventData = 'A vote of  '+event.data.substr(10)+'has been received';
+    		} else if(eventData.indexOf('Cleared server side chat & vote history.') ==0){
+    			document.getElementById('messages').innerHTML = "";
+    			//reset our vote value to unset
+    			lastVote=-3;
+    		} else if(eventData.indexOf('/NEWVOTE') == 0){
+    			//Reset our vote value to unset
+    			lastVote=-3;
+    			return;
+    		}
+     		var messagesArea = document.getElementById('messages')
+      		messagesArea.innerHTML += eventData+'\n';
+      		messagesArea.scrollTop = messagesArea.scrollHeight;
+   		}
+
+    	function onOpen(event) {
+      		var name = getCookie("username");
+      		if(name!=''){
+      			document.getElementById('myName').value = name;
+      		}
+      		setName();
+      		setRoom();
+    	}
+
+    	function onError(event) {
+      		alert("An error has occurred. More info:\n"+event.data);
+    	}
+
+    	function send() {
+      		var message = document.getElementById('inputmessage').value;
+      		webSocket.send(message);
+      		document.getElementById('inputmessage').value = "";
+      		return false;
+    	}
+    
+    	function sendURL() {
+      		var message = document.getElementById('inputURL').value;
+      		webSocket.send("/URL"+message);
+      		document.getElementById('inputURL').value = "";
+      		return false;
+    	}
+    
+    	function setRoom() {
+      		var roomName = getRoom();
+      		webSocket.send("/SETROOM"+roomName);
+      		document.getElementById('messages').innerHTML = "";
+      		return false;
+    	}
+
+    	function getRoom(){
+    		return document.getElementById('roomName').value;
+    	}
+    
+    	function setName() {
+      		var myName = getName();
+      		webSocket.send("/SETNAME"+myName);
+      		if(myName!=''){
+      			setCookie("username", myName, 365);
+      		}
+      		return false;
+    	}
+    
+    	function getName(){
+    		return document.getElementById('myName').value;
+    	}
+    	
+    	function setCookie(cname, cvalue, exdays) {
+   			var d = new Date();
+    		d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    		var expires = "expires="+d.toGMTString();
+    		document.cookie = cname + "=" + cvalue + "; " + expires;
+		}
+
+		function getCookie(cname) {
+    		var name = cname + "=";
+    		var ca = document.cookie.split(';');
+    		for(var i=0; i<ca.length; i++) {
+        		var c = ca[i].trim();
+        		if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    		}
+   			return "";
+		}
+		
+		function vote(value){
+			if(lastVote==value){
+				//undo vote (default to -3 which is not voted)
+				webSocket.send("/VOTEVALUE"+getName()+"###"+"-3"+"##"+lastVote);				
+				lastVote=-3;
+			} else {
+				//send vote
+				webSocket.send("/VOTEVALUE"+getName()+"###"+value+"##"+lastVote);
+				lastVote=value;
+			}
+		}
+		
+		function newVote(){
+			webSocket.send("/NEWVOTE"+getRoom());	
+		}
+    
+    	function voteState(){
+    		webSocket.send("/VOTESTATE"+getRoom());	
+    	}
+    	
+    	function clearRoom(){
+    		if(confirm("This will clear all chat and vote history for this room.")){
+    	    	webSocket.send("/CLEARHISTORY");
+    		}
+    	}
+    	
+    	function syncIframe(){
+    		iframeUrl = document.getElementById('frame').src;
+			document.getElementById('inputURL').value = iframeUrl;
+    	}
+	</script>
+</head>
+<body>
+	<p>
+	Real time planning poker using WebSockets and running on WebSphere Application Server Liberty Profile.
+	</p>
+	<div>
+		<b>Room: </b><input id="roomName" type="text" value="defaultRoom" 
+		onkeydown="if (event.keyCode == 13) { setRoom() }"/> <input
+			type="submit" value="Set Room" onclick="setRoom()" />
+		<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Name: </b><input id="myName" type="text" value="Anon" 
+		onkeydown="if (event.keyCode == 13) { setName() }"/> <input
+			type="submit" value="Set Name" onclick="setName()" />			
+	</div>
+	<hr />
+	<div>
+		<b>Message: </b><input id="inputmessage" type="text" autofocus 
+			onkeydown="if (event.keyCode == 13) { send() }" style="width:25%"/> 
+		<input type="submit" value="Send Message" onclick="send()" />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<b>URL to share: </b>
+		<input id="inputURL" type="text" autofocus 
+			onkeydown="if (event.keyCode == 13) { sendURL() }" style="width:25%" /> 
+		<input type="submit" value="Push URL" onclick="sendURL()" /><br/>
+		<input type='button' value='Back' onclick='history.back()'>
+		<input type='button' value='Forward' onclick='history.forward()'><br/>
+		<textarea rows="30" name="messages" id="messages" readonly></textarea>
+		
+		<iframe id="frame" name="frame" src="about:blank" onunload="syncIframe();">
+  			<p>You need to support iFrames for the shared page view to work.</p>
+		</iframe>
+	    <input type="button" onClick="clearRoom();" value="Clear all room chat/vote history"/>
+		
+		<p>Click a score card blow to vote on the current topic.</p>
+		<div id="pokerCards">
+			<img onClick="vote('0');"   src="img/poker0.png"/>
+			<img onClick="vote('1');"   src="img/poker1.png"/>
+			<img onClick="vote('2');"   src="img/poker2.png"/>
+			<img onClick="vote('3');"   src="img/poker3.png"/>
+			<img onClick="vote('5');"   src="img/poker5.png"/>
+			<img onClick="vote('8');"   src="img/poker8.png"/><br/>
+			<img onClick="vote('13');"  src="img/poker13.png"/>
+			<img onClick="vote('20');"  src="img/poker20.png"/>
+			<img onClick="vote('40');"  src="img/poker40.png"/>
+			<img onClick="vote('100');" src="img/poker100.png"/>
+			<img onClick="vote('-1');"  src="img/pokerdunno.png"/>
+			<img onClick="vote('-2');"  src="img/pokerpass.png"/>
+		</div>
+		<input type="button" onClick="newVote();" value="Start new vote"/>
+		<input type="button" onClick="voteState();" value="Current vote status"/>
+	</div>
+</body>
+</html>

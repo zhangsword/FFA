@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+
+textarea {
+	width: 40%;
+	height: 455px;
+	box-sizing: border-box; 			/* For IE and modern versions of Chrome */
+	-moz-box-sizing: border-box; 		/* For Firefox                          */
+	-webkit-box-sizing: border-box;		/* For Safari                           */
+	border: none;
+	resize: none;
+	font-family: Arial;
+}
+
+#frame {
+	float: right;
+	height: 750px;
+	width: 55%
+}
+
+p {
+	font-family: Arial;
+}
+
+b {
+	font-family: Arial;
+}

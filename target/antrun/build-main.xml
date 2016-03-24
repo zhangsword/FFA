@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <mkdir dir="/Users/sword/Documents/workspaceNew/websocket/target/usr/servers/PlanningPoker"/>
+  <copy todir="/Users/sword/Documents/workspaceNew/websocket/target/usr/servers/PlanningPoker">
+    <fileset dir="src/main/wlp"/>
+  </copy>
+  <mkdir dir="/Users/sword/Documents/workspaceNew/websocket/target/usr/servers/PlanningPoker/apps"/>
+  <copy file="/Users/sword/Documents/workspaceNew/websocket/target/planningpoker-1.0-SNAPSHOT.war" tofile="/Users/sword/Documents/workspaceNew/websocket/target/usr/servers/PlanningPoker/apps/PlanningPoker.war"/>
+</target>
+</project>
