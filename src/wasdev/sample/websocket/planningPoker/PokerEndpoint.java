@@ -29,11 +29,11 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-
+ 
 @ServerEndpoint(value = "/PokerEndpoint")
 public class PokerEndpoint {
 	private Session currentSession = null;
-	private Room room;
+	private Room room ;
 	private String userName = "Anon";
 
 	//message prefixes which denotes a special action being required.
