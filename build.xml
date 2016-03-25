@@ -6,7 +6,7 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="FFA">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../Downloads/eclipse/"/>
-    <property name="WLP_HOME" value="/home/ibmcloud/wlp"/>
+    <property name="WLP_HOME" value="/home/ibmcloud/wlp/"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
@@ -30,33 +30,33 @@
         <pathelement location="${WLP_HOME}/dev/api/ibm/com.ibm.websphere.appserver.api.webCache_1.1.11.jar"/>
         <pathelement location="${WLP_HOME}/dev/api/ibm/com.ibm.websphere.appserver.api.webcontainer.security.app_1.1.11.jar"/>
         <pathelement location="${WLP_HOME}/dev/api/ibm/com.ibm.websphere.appserver.api.wsoc_1.0.11.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.blueprint_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.eba.jndi_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.eba.tx_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.jaxrs_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.jpa_1.1.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.annotation.1.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.cdi.1.0_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.concurrent.1.0_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.connector.1.6_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.ejb.3.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.el.2.2_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.interceptor.1.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jaxrs.1.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsf.2.0_1.0.10.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.blueprint_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.eba.jndi_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.eba.tx_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.jaxrs_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.websphere.appserver.thirdparty.jpa_1.1.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.annotation.1.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.cdi.1.0_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.concurrent.1.0_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.connector.1.6_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.ejb.3.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.el.2.2_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.interceptor.1.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jaxrs.1.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsf.2.0_1.0.11.jar"/>
         <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsf.tld.2.0_1.1.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsp.2.2_1.0.10.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsp.2.2_1.0.11.jar"/>
         <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jsp.tld.2.2_1.1.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jstl.1.2_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.persistence.2.0_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.servlet.3.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.transaction.1.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.validation.1.0_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.websocket.1.1_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.ws.jaxrs.api_1.0.10.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.jstl.1.2_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.persistence.2.0_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.servlet.3.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.transaction.1.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.validation.1.0_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.javaee.websocket.1.1_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.ws.jaxrs.api_1.0.11.jar"/>
         <pathelement location="${WLP_HOME}/dev/api/third-party/com.ibm.ws.jpa_1.1.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.org.osgi.cmpn.4.2.0_1.0.10.jar"/>
-        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.org.osgi.core.4.2.0_1.0.10.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.org.osgi.cmpn.4.2.0_1.0.11.jar"/>
+        <pathelement location="${WLP_HOME}/dev/api/spec/com.ibm.ws.org.osgi.core.4.2.0_1.0.11.jar"/>
     </path>
     <path id="Web App Libraries.libraryclasspath"/>
     <path id="EAR Libraries.libraryclasspath"/>
