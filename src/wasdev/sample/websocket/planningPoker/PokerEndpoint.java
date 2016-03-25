@@ -37,7 +37,7 @@ public class PokerEndpoint {
 	private String userName = "Anon";
 
 	//message prefixes which denotes a special action being required.
-	private final String urlCommand 			= "/URL";
+	private final String urlCommand 			= "/URL" ;
 	private final String setNameCommand 		= "/SETNAME";
 	private final String clearHistoryCommand 	= "/CLEARHISTORY";
 	private final String setRoomCommand 		= "/SETROOM";
