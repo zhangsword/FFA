@@ -70,7 +70,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-          <ant antfile="${project.build.directory}/build.xml" target="build"/>
+          <ant antfile="./build.xml" target="build"/>
                               <mkdir dir="${project.build.directory}/usr/servers/PlanningPoker"/>
                               <copy todir="${project.build.directory}/usr/servers/PlanningPoker">
                                     <fileset dir="src/main/wlp"/>
